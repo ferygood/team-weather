@@ -1,7 +1,29 @@
-#raining{}
-#raining>.location{
-	border-bottom:1px solid #000000;
-}
-#raining>.location>.town{
-	font-weight:bold;
-}
+        #raining {}
+        
+        #raining>.location {
+            border-bottom: 1px solid #000000;
+        }
+        
+        #raining>.location>.town {
+            font-weight: bold;
+        }
+        
+        #raining>.rainingtable {
+            border: 2px solid;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .rainingtable>thead {
+            background-color: #333;
+            color: #fff;
+        }
+        
+        .rainingtable>thead>tr {
+            font-size: 28px;
+        }
+        
+        .rainingtable>tbody>tr>td {
+            border: 1px solid #000000;
+            text-align: center;
+        }

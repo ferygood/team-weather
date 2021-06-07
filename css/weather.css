@@ -1,0 +1,40 @@
+
+#weather>.weatherpage{
+	text-align: center;
+}
+#weather>.weatherpage a:hover{
+	cursor: pointer;
+	font-size: 24px;
+	color:blue;
+}
+#weather>.weatherlocation{
+	text-align: center;
+}
+#weather>.weatherlocation>.weathertown{
+	font-weight:bold;text-align: center;
+	font-size: 24px;
+}
+#weather>.weatherlocation>.weatherTEMP{
+	display: flex;
+	margin-right: auto;margin-left:auto;
+	width:900px ;height:100px;
+	margin-top: 30px;margin-bottom: 30px;
+}
+#weather>.weatherlocation>.weatherTEMP>.weatherTEMPcold{
+	background-color: #80FFFF ;
+	text-align: center;
+	flex:auto;
+	height: 100px;width:300px;line-height: 100px;
+}
+#weather>.weatherlocation>.weatherTEMP>.weatherTEMPcool{
+	background-color:#FFD306 ;
+	text-align: center;
+	flex:auto;
+	height: 100px;width:300px;line-height: 100px;
+}
+#weather>.weatherlocation>.weatherTEMP>.weatherTEMPhot{
+	background-color:#EA0000 ;
+	text-align: center;
+	flex:auto;
+	height: 100px;width:300px;line-height: 100px;
+}

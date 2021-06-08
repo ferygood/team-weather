@@ -1,6 +1,6 @@
 let weatherRecords=null;
 let weatherPages ;
-fetch("https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0003-001?Authorization="+CWB_API_KEY).then((response)=>{
+fetch("https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization="+CWB_API_KEY).then((response)=>{
 	return response.json();
 }).then((data)=>{
 	weatherRecords=data.records;
@@ -24,25 +24,35 @@ function renderWeather(page){
 			item.className = "weatherlocation" ;
 			const town = document.createElement("div") ;
 			town.className = "weathertown" ;
+			location.weatherElement[0].time[0]
 
-			town.textContent = location.parameter[0].parameterValue + " - " + location.parameter[2].parameterValue ;
+			town.textContent = location.locationName
+			const time = document.createElement("div") ;
+			time.className = "weatherTime" ;
+			time.textContent = location.weatherElement[2].time[0].startTime + " ~ " + location.weatherElement[2].time[0].endTime ; 
+			
+			const weatherTEMPDES = document.createElement("div") ;
+			weatherTEMPDES.className = "weatherTEMPDES" ;
+			const br = document.createElement("br") ;
+			const node = document.createTextNode(location.weatherElement[0].time[0].parameter.parameterName) ;
+			const node2 = document.createTextNode(location.weatherElement[3].time[0].parameter.parameterName) ;
+			weatherTEMPDES.appendChild(node) ; weatherTEMPDES.appendChild(br) ; weatherTEMPDES.appendChild(node2) ;
 			const weatherTEMP = document.createElement("div") ;
 			weatherTEMP.className="weatherTEMP";
 			const weatherTEMPcold = document.createElement("div") ;
 			weatherTEMPcold.className = "weatherTEMPcold" ;
-			const weatherTEMPcool = document.createElement("div") ;
-			weatherTEMPcool.className = "weatherTEMPcool" ;
+			// const weatherTEMPDES = document.createElement("div") ;
+			weatherTEMPDES.className = "weatherTEMPDES" ;
 			const weatherTEMPhot = document.createElement("div") ;
 			weatherTEMPhot.className = "weatherTEMPhot" ;
-			if (location.weatherElement[3].elementValue < 18){
-				weatherTEMPcold.textContent = location.weatherElement[3].elementName + " : " + location.weatherElement[3].elementValue + "°C";
-			}else if (location.weatherElement[3].elementValue < 26){
-				weatherTEMPcool.textContent = location.weatherElement[3].elementName + " : " + location.weatherElement[3].elementValue + "°C";
-			}else{
-				weatherTEMPhot.textContent = location.weatherElement[3].elementName + " : " + location.weatherElement[3].elementValue + "°C";
-			}
-			item.appendChild(town);
-			item.appendChild(weatherTEMP);weatherTEMP.appendChild(weatherTEMPcold) ; weatherTEMP.appendChild(weatherTEMPcool);weatherTEMP.appendChild(weatherTEMPhot) ;
+
+			weatherTEMPcold.textContent = "L:" + location.weatherElement[2].time[0].parameter.parameterName + "°C";;
+			weatherTEMPhot.textContent = "H:" + location.weatherElement[4].time[0].parameter.parameterName  + "°C";;
+
+			
+			item.appendChild(town) ;
+			item.appendChild(time) ;
+			item.appendChild(weatherTEMP);weatherTEMP.appendChild(weatherTEMPcold) ; weatherTEMP.appendChild(weatherTEMPDES);weatherTEMP.appendChild(weatherTEMPhot) ;
 			container.appendChild(item);
 
 		}
@@ -63,42 +73,42 @@ function renderWeather(page){
 		pages.appendChild(a) ;
 	}
 	container.appendChild(pages) ;
-	let all = document.querySelectorAll("div.weatherTEMP") ;
-	let textcount = 0 ;
-	while(textcount < 10){
-		let cold = all[textcount].querySelector(".weatherTEMPcold") ;
-		let cool = all[textcount].querySelector(".weatherTEMPcool") ;
-		let hot = all[textcount].querySelector(".weatherTEMPhot") ;
-		if (cold.textContent !== ""){
-			let csscountcold = 1 ;
-			setInterval(() => {
-				if (csscountcold < 0.6){
-					csscountcold = 1 ;
-				}
-				cold.style.opacity = csscountcold ;
-				csscountcold -= 0.1 ;
-			},300) ;
-		}else if (cool.textContent !== ""){
-			let csscountcool = 1 ;
-			setInterval(() => {
-				if (csscountcool < 0.6){
-					csscountcool = 1 ;
-				}
-				cool.style.opacity = csscountcool ;
-				csscountcool -= 0.1 ;
-			},300) ;
-		}else if (hot.textContent !== ""){
-			let csscounthot = 1 ;
-			setInterval(() => {
-				if (csscounthot < 0.6){
-					csscounthot = 1 ;
-				}
-				hot.style.opacity = csscounthot ;
-				csscounthot -= 0.1 ;
-			},300) ;
-		}
-		textcount += 1 ;
-	}
+	// let all = document.querySelectorAll("div.weatherTEMP") ;
+	// let textcount = 0 ;
+	// while(textcount < 10){
+	// 	let cold = all[textcount].querySelector(".weatherTEMPcold") ;
+	// 	let DES = all[textcount].querySelector(".weatherTEMPDES") ;
+	// 	let hot = all[textcount].querySelector(".weatherTEMPhot") ;
+	// 	if (cold.textContent !== ""){
+	// 		let csscountcold = 1 ;
+	// 		setInterval(() => {
+	// 			if (csscountcold < 0.6){
+	// 				csscountcold = 1 ;
+	// 			}
+	// 			cold.style.opacity = csscountcold ;
+	// 			csscountcold -= 0.1 ;
+	// 		},300) ;
+	// 	}else if (DES.textContent !== ""){
+	// 		let csscountDES = 1 ;
+	// 		setInterval(() => {
+	// 			if (csscountDES < 0.6){
+	// 				csscountDES = 1 ;
+	// 			}
+	// 			DES.style.opacity = csscountDES ;
+	// 			csscountDES -= 0.1 ;
+	// 		},300) ;
+	// 	}else if (hot.textContent !== ""){
+	// 		let csscounthot = 1 ;
+	// 		setInterval(() => {
+	// 			if (csscounthot < 0.6){
+	// 				csscounthot = 1 ;
+	// 			}
+	// 			hot.style.opacity = csscounthot ;
+	// 			csscounthot -= 0.1 ;
+	// 		},300) ;
+	// 	}
+	// 	textcount += 1 ;
+	// }
 }
 
 

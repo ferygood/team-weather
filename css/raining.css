@@ -1,29 +1,138 @@
-        #raining {}
-        
-        #raining>.location {
-            border-bottom: 1px solid #000000;
-        }
-        
-        #raining>.location>.town {
-            font-weight: bold;
-        }
-        
-        #raining>.rainingtable {
-            border: 2px solid;
-            width: 100%;
-            max-width: 100%;
-        }
-        
-        .rainingtable>thead {
-            background-color: #333;
-            color: #fff;
-        }
-        
+    /* 
+
+#raining>.location {
+    border-bottom: 1px solid #000000;
+}
+
+#raining>.location>.town {
+    font-weight: bold;
+} */
+    
+    #raining {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .rainingsearchbox>a {
+        font-family: Noto Sans TC;
+        font-size: 20px;
+        letter-spacing: 1px;
+    }
+    
+    .rainingsearchbox>button {
+        height: 40px;
+        margin: 10px;
+        display: inline-block;
+        font-size: 20PX;
+        cursor: pointer;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 5px #999;
+        background-color: #bbbdbb;
+    }
+    
+    .rainingsearchbox>button:active {
+        background-color: #5d5e5d;
+        box-shadow: 0 3px #666;
+        transform: translateY(2px);
+    }
+    
+    .rainingsearchbox {
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+    }
+    
+    .rainingsearchboxinput {
+        margin-right: 10px;
+        padding: 0px 0px 0px 10px;
+        flex: none;
+        border: 2px solid #858585;
+        width: 240px;
+        height: 36px;
+        border-radius: 5px;
+        font-family: Noto Sans TC;
+        letter-spacing: 2px;
+    }
+    
+    .rainingpagebtnbox {
+        padding-right: 20px;
+        display: flex;
+    }
+    
+    .rainingprevbtn,
+    .rainingnextbtn {
+        width: 150px;
+        margin: 10px;
+        display: inline-block;
+        font-size: 20PX;
+        cursor: pointer;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 5px #999;
+        background-color: #bbbdbb;
+    }
+    
+    .rainingprevbtn:active,
+    .rainingnextbtn:active {
+        background-color: #5d5e5d;
+        box-shadow: 0 3px #666;
+        transform: translateY(2px);
+    }
+    
+    .rainingprevbtn:hover,
+    .rainingnextbtn:hover {
+        background-color: #5d5e5d;
+        opacity: 0.7;
+    }
+    
+    #raining>.rainingtable {
+        border: 2px solid;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .rainingtable>thead {
+        background-color: #333;
+        color: #fff;
+    }
+    
+    .rainingtable>thead>tr {
+        font-size: 28px;
+    }
+    
+    .rainingtable>tbody>tr>td {
+        border: 1px solid #000000;
+        text-align: center;
+    }
+    
+    @media screen and (min-width: 500px) and (max-width: 1200px) {}
+    
+    @media screen and (max-width: 500px) {
         .rainingtable>thead>tr {
-            font-size: 28px;
+            font-size: 15px;
         }
-        
-        .rainingtable>tbody>tr>td {
-            border: 1px solid #000000;
-            text-align: center;
+        #raining {
+            justify-content: center;
         }
+        .rainingsearchboxinput {
+            /* margin-right: 10px; */
+            padding: 0px 0px 0px 10px;
+            flex: none;
+            border: 2px solid #858585;
+            width: 150px;
+            height: 36px;
+            border-radius: 5px;
+            font-family: Noto Sans TC;
+            letter-spacing: 2px;
+        }
+        .rainingsearchbox {
+            padding: 0px;
+        }
+    }

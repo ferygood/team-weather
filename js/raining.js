@@ -1,40 +1,96 @@
 let records = null;
-let container = document.querySelector("#raining");
+let rainingcontainer = document.querySelector("#raining");
+let rainingpage = 0;
 
-
-fetch("https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0002-001?Authorization=" + CWB_API_KEY).then((response) => {
-    return response.json();
-}).then((data) => {
-    records = data.records;
-    rainingaddbody(0);
-});
-
-function renderRaining(page) {
-    let startIndex = page * 10;
-    let endIndex = (page + 1) * 10;
-    for (let i = startIndex; i < endIndex; i++) {
-        const location = records.location[i];
-        const item = document.createElement("div");
-        item.className = "location";
-        const town = document.createElement("div");
-        town.className = "town";
-        town.textContent = location.parameter[0].parameterValue + "、" + location.parameter[2].parameterValue;
-        const amount = document.createElement("amount");
-        amount.className = "amount";
-        amount.textContent = location.weatherElement[6].elementValue + " mm";
-        item.appendChild(town);
-        item.appendChild(amount);
-        container.appendChild(item);
+function raininggetapidata(raininggetapiindex) {
+    if (rainingpage + raininggetapiindex < 0) {
+        rainingpage = 0;
+    } else {
+        rainingpage = rainingpage + raininggetapiindex;
     }
+    // console.log(rainingpage);
+    fetch("https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0002-001?Authorization=" + CWB_API_KEY).then((response) => {
+        return response.json();
+    }).then((data) => {
+        records = data.records;
+        // console.log(records.location.length)
+
+        if (rainingpage >= parseInt(records.location.length / 10) + 1) {
+            rainingpage = parseInt(records.location.length / 10);
+        }
+
+        rainingaddbody(rainingpage);
+    });
 }
 
-//建立基礎表格
-function rainingaddtable() {
-    const rainingtable = document.createElement("table");
-    rainingtable.className = "rainingtable"
-    container.appendChild(rainingtable);
 
-    //表格標題
+//建立基礎畫面
+function rainingaddtable() {
+    rainingsearchbox = document.createElement("div");
+    rainingsearchbox.className = "rainingsearchbox"
+    rainingcontainer.appendChild(rainingsearchbox);
+
+    rainingsearchboxtext = document.createElement("a");
+    rainingsearchboxtext.textContent = "行政區："
+    rainingsearchbox.appendChild(rainingsearchboxtext);
+
+
+    rainingsearchboxinput = document.createElement("input");
+    rainingsearchboxinput.className = "rainingsearchboxinput";
+    rainingsearchbox.appendChild(rainingsearchboxinput);
+
+    rainingsearchboxbtn = document.createElement("button");
+    rainingsearchboxbtn.textContent = "搜尋";
+    rainingsearchbox.appendChild(rainingsearchboxbtn);
+    rainingsearchboxbtn.onclick = function() {
+        let raininginputkeyword = document.querySelector('.rainingsearchboxinput');
+        alert(raininginputkeyword.value)
+    }
+
+    rainingpagebtnbox = document.createElement("div");
+    rainingpagebtnbox.className = "rainingpagebtnbox"
+    rainingcontainer.appendChild(rainingpagebtnbox);
+
+
+    const rainingprevbtn = document.createElement("button");
+    rainingprevbtn.textContent = "上一頁"
+    rainingprevbtn.className = "rainingprevbtn"
+    rainingpagebtnbox.appendChild(rainingprevbtn);
+
+    rainingprevbtn.onclick = function() {
+        let element = document.querySelector('.rainingtable');
+        while (element.firstChild) {
+            element.removeChild(element.firstChild);
+        }
+        rainingaddhead()
+        raininggetapidata(-1);
+    }
+
+    const rainingnextbtn = document.createElement("button");
+    rainingnextbtn.textContent = "下一頁"
+    rainingnextbtn.className = "rainingnextbtn"
+    rainingpagebtnbox.appendChild(rainingnextbtn);
+
+    rainingnextbtn.onclick = function() {
+        let element = document.querySelector('.rainingtable');
+        while (element.firstChild) {
+            element.removeChild(element.firstChild);
+        }
+        rainingaddhead()
+        raininggetapidata(1);
+    }
+
+    let rainingtable = document.createElement("table");
+    rainingtable.className = "rainingtable"
+    rainingcontainer.appendChild(rainingtable);
+
+
+}
+
+//表格標題
+function rainingaddhead() {
+
+    let rainingtable = document.querySelector('.rainingtable')
     const rainingtablehead = document.createElement("thead");
     rainingtable.appendChild(rainingtablehead);
 
@@ -64,32 +120,29 @@ function rainingaddtable() {
     const rainingtableheadth5 = document.createElement("th");
     rainingtableheadth5.textContent = "24小時累計"
     rainingtableheadtr.appendChild(rainingtableheadth5);
-
-
-
-
-
 }
 
-rainingaddtable()
-
+//表格內容
 function rainingaddbody(page) {
     let startIndex = page * 10;
     let endIndex = (page + 1) * 10
 
-    //表格內容
+    let rainingdata = records.location.slice(startIndex, endIndex)
+        // console.log(rainingdata)
+
     rainingtable = document.querySelector('.rainingtable');
     const rainingtablebody = document.createElement("tbody");
+    rainingtablebody.className = "rainingtabletbody";
     rainingtable.appendChild(rainingtablebody);
 
-    for (let i = startIndex; i < endIndex; i++) {
-        const location = records.location[i];
+    for (let i = 0; i < rainingdata.length; i++) {
+        const location = rainingdata[i];
 
         const rainingtablebodytr = document.createElement("tr");
         rainingtablebody.appendChild(rainingtablebodytr);
 
         const rainingtablebodyth0 = document.createElement("td");
-        rainingtablebodyth0.textContent = i + 1
+        rainingtablebodyth0.textContent = startIndex + i + 1
         rainingtablebodytr.appendChild(rainingtablebodyth0);
 
         const rainingtablebodyth1 = document.createElement("td");
@@ -114,3 +167,10 @@ function rainingaddbody(page) {
 
     }
 }
+
+//按鈕功能列
+rainingaddtable();
+//表格標
+rainingaddhead();
+//表格內容
+raininggetapidata(0);

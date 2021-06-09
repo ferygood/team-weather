@@ -42,6 +42,11 @@
         transform: translateY(2px);
     }
     
+    .rainingsearchbox>button:hover {
+        background-color: #5d5e5d;
+        opacity: 0.7;
+    }
+    
     .rainingsearchbox {
         display: flex;
         align-items: center;
@@ -58,6 +63,10 @@
         border-radius: 5px;
         font-family: Noto Sans TC;
         letter-spacing: 2px;
+    }
+    
+    .rainingsearchboxinput:hover {
+        border: 3px solid #858585;
     }
     
     .rainingpagebtnbox {
@@ -134,5 +143,10 @@
         }
         .rainingsearchbox {
             padding: 0px;
+        }
+        #raining>.rainingtable {
+            border: 1px solid;
+            width: 99%;
+            max-width: 100%;
         }
     }

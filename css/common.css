@@ -8,6 +8,7 @@ h3 {
 	background-color: rgba(142,189,239,0.7);
 	margin-top: 0px;
 	margin-bottom: 0px;
+	padding: 10px 0px;
 }
 
 .background {
@@ -21,7 +22,7 @@ h3 {
 
 @media (max-width: 600px){
 	body{
-		font-size:10px;
+		font-size:12px;
 	}
 	.background {
 		height: 200px;

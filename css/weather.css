@@ -3,9 +3,10 @@
 }
 #weather>.weatherPeriod {
 	text-align: center;margin-bottom: 50px;
-	width:80%;margin-right: auto;margin-left: auto;
+	width:100%;margin-right: auto;margin-left: auto;
 }
 #weather button {
+	position: relative;left:10px;
 	width:85px;margin-right: 20px;
 	height: 30px;background-color:#BEBEBE; color:#FFFFFF;
 	border-radius: 5px;
@@ -16,7 +17,7 @@
 }
 #weather>.weatherArea {
 	text-align: center;margin-bottom: 50px;
-	width:80%;margin-right: auto;margin-left: auto;
+	width:100%;margin-right: auto;margin-left: auto;
 }
 #weather>.weatherdata>.weatherpage{
 	text-align: center;
@@ -67,19 +68,17 @@
 	#weather>.weatherdata>.weatherlocation>.weatherTEMP>.weatherTEMPcold, #weather>.weatherdata>.weatherlocation>.weatherTEMP>.weatherTEMPhot{
 		width:150px;
 	}
-	#weather>.weatherArea button {
+	/* #weather>.weatherArea button {
 		width:60px;
 	}
 	#weather>.weatherArea button:hover {
 		width:70px;height:40px;
-	}
+	} */
 }
 @media screen and (max-width:600px){
-	#weather>.weatherArea, #weather>.weatherPeriod{
-		width: 100%;
-	}
 	#weather>.weatherArea button {
-		margin-right: 40px;margin-bottom:40px;
+		margin-right: 60px;margin-bottom:40px;
+		left: 30px;
 	}
 	#weather>.weatherdata>.weatherlocation>.weatherTEMP{
 		width:95%;margin-bottom: 10px;height:50px;
@@ -95,5 +94,17 @@
 	#weather>.weatherdata>.weatherlocation>.weatherTEMP>.weatherTEMPDES{
 		line-height: 25px;height:50px;
 		font-size:16px;
+	}
+}
+@media screen and (max-width:500px){
+	#weather>.weatherArea button {
+		margin-right: 40px;margin-bottom:40px;
+		left: 20px;
+	}
+}
+@media screen and (max-width:450px){
+	#weather>.weatherArea button {
+		margin-right: 20px;margin-bottom:40px;
+		left: 10px;
 	}
 }

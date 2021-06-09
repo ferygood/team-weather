@@ -164,7 +164,7 @@ function rainingaddbody(page) {
         });
 
 
-        console.log(records)
+        // console.log(records)
         rainingpagemax = records.length;
         if (page >= parseInt(rainingpagemax / 10) + 1) {
             page = parseInt(rainingpagemax / 10);
@@ -197,7 +197,7 @@ function rainingaddbody(page) {
     rainingdata = rainingdata.sort(function(a, b) {
         return parseFloat(a.weatherElement[6].elementValue) < parseFloat(b.weatherElement[6].elementValue) ? 1 : -1;
     });
-    console.log(rainingdata)
+    // console.log(rainingdata)
 
 
     rainingtable = document.querySelector('.rainingtable');

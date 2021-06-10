@@ -20,6 +20,10 @@ h3 {
   margin-bottom: 1px;
 }
 
+.title { 
+	margin-bottom: 20px;
+}
+
 @media (max-width: 600px){
 	body{
 		font-size:12px;

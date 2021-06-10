@@ -1,3 +1,37 @@
 body{
 	font-size:20px;
+	margin: 0;
 }
+
+h3 {
+	text-align: center;
+	background-color: rgba(142,189,239,0.7);
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding: 10px 0px;
+}
+
+.background {
+  max-width: 100%;
+  height: 400px;
+  background-image: url("../img/taiwan.jpg");
+  background-size: cover;
+  background-position: center center;
+  margin-bottom: 1px;
+}
+
+.title { 
+	margin-bottom: 20px;
+}
+
+@media (max-width: 600px){
+	body{
+		font-size:12px;
+	}
+	.background {
+		height: 200px;
+	}
+}
+	
+}
+
